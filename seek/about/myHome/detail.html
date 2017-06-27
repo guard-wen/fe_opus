@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=0, width=device-width"/>
+	<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+	<title>寻物详情</title>
+	<link rel="stylesheet" type="text/css" href="../../font/iconfont.css">
+	<link rel="stylesheet" type="text/css" href="../../css/weui.css">
+	<link rel="stylesheet" type="text/css" href="../../css/jquery-weui.css">
+	<link rel="stylesheet" type="text/css" href="../../css/common.css">
+	<link rel="stylesheet" type="text/css" href="../../publish/nearby/nearby_common.css">
+	<style type="text/css">
+	body{background: #fff;}
+		.lost_place{border-top: 1px solid #ebebeb;border-bottom: 1px solid #ebebeb;}
+		.lost_time{border-bottom: 1px solid #ebebeb;}
+		.lost_place span,.lost_time span{color: #333;font-size: 0.7rem;}
+
+		#bottom_box{position: absolute;bottom: 0;width: 100%;}
+		#bottom_box button{margin: 0 auto;width: 80%;}
+		.contact_us{font-size: 0.6rem;height: 2rem;line-height: 2rem;}
+		.contact_us a{color: #999;}
+
+		#ask_mask{position: absolute;width: 100%;height: 100%;top: 0;left: 0;background: rgba(0,0,0,0.5);color: #333;display: none;}
+		#ask_box{
+			width: 94%;
+			position: absolute;
+			top: 50%;left: 50%;
+			transform: translate(-50%,-50%);
+		}
+		#close_box{text-align: right;color: #fff;}
+		#close_box i{font-size: 1.2rem;}
+		#ask_content_box{background: #fff;border-radius: 0.4rem;padding: 1rem 0;}
+		#ask_title{font-size: 0.9rem;margin-bottom: 1rem;}
+		#ask_tip{font-size: 0.7rem;color: #999;margin-bottom: 1rem;}
+		#ask_bottom{padding:0.6rem;font-size: 0.8rem;line-height: 1.8rem;}
+		.ask_input{background: #ebebeb;border-radius: 0.2rem;padding: 0.3rem;}
+		#ask_top{text-align: center;}
+		#ask_success_box{border-radius: 0.4rem;text-align: center;border-radius: 0.4rem;display: none;}
+		#ask_success_box #ask_success_top{height: 5rem;background: #00d697;color: #fff;border-top-left-radius: 0.4rem;border-top-right-radius: 0.4rem;}
+		#ask_success_box #ask_success_top h2{font-weight: normal;font-size: 1.4rem;line-height: 3.2rem;}
+		#ask_success_box #ask_success_top p{font-size: 0.7rem;}
+		#ask_success_box #ask_success_bottom{
+			height: 5rem;line-height: 5rem;
+		 	background: #fff;
+		 	border-bottom-left-radius: 0.4rem;
+		 	border-bottom-right-radius: 0.4rem;
+		 	font-size: 0.9rem;
+		}
+	</style>
+</head>
+<body>
+	<header>
+		<div class="weui-flex">
+		  <div class="weui-flex__item text_left"><a href="index.html"><i class="iconfont" style="font-size: 1.1rem;">&#xe676;</i></a></div>
+		  <div class="weui-flex__item text_center">寻物详情</div>
+		  <div class="weui-flex__item text_right"></div>
+		</div>
+	</header>
+	<div id="list" style="clear: both;">
+		<div class="card_box" v-for="item in recommend">
+			  <div class="weui-cell card_top_box" style="border: none;">
+			    <div class="weui-cell__hd card_pic_box" >
+			     	<img src="../../img/5.jpg"/>
+			    </div>
+			    <div class="weui-cell__bd card_text_box">
+			      <h3>Guard</h3>
+	    			<span class="sl_address">12分钟前</span>
+			    </div>
+			    <div class="weui-cell__bd card_text_box text_right reward">
+			      报酬 <span class="yellow_font">100元</span>
+			    </div>
+			  </div>
+			  <div class="card_middle_box">
+			  	<p><span class="green_font">#寻物#</span> iphone8 plus在深圳苹果体验店被偷了，找到者重金酬谢。</p>
+			  </div>
+	    	<div class="card_bottom_box">
+	    			<div class="card_bottom_img_box">
+	    				<img src="../../img/1.jpg">
+	    				<img src="../../img/2.jpg">
+	    			</div>
+	    			<div class="card_bottom_img_box">
+	    				<img src="../../img/2.jpg">
+	    			</div>
+	    			<div class="card_bottom_img_box">
+	    				<img src="../../img/3.jpg">
+	    			</div>
+	    			<div style="clear: both;"></div>
+	    	</div>	    	
+	    </div>
+	</div>
+	<div class="weui-form-preview__item lost_place">
+      <label class="weui-form-preview__label" style="margin-top: 0.1rem;">丢失地：</label>
+      <span class="weui-form-preview__value">深圳市龙岗区六</span>
+    </div>
+	<div class="lost_time">
+		丢失时间：<span>2017-04-19</span>
+	</div>
+	<div id="bottom_box">
+	    <p class="weui-btn-area">
+	      <a onclick="openAsk()" class="weui-btn submitBtn" style="background: #00d697;font-size: 0.8rem">已收到物品</a>
+	    </p>
+		<div class="contact_us text_center"><a href="">联系客服</a></div>
+	</div>
+	<div id="ask_mask">
+		<div id="ask_box">
+			<div id="close_box"><i class="iconfont" onclick="closeAsk()">&#xe671;</i></div>
+			<div id="ask_content_box">
+				<div id="ask_top">
+					<p id="ask_tip" style="font-size: 0.8rem;">确认后100元报酬将支付给对方，你确认吗？</p>
+				</div>
+				<p class="weui-btn-area" style="width: 50%;margin: 0 auto;margin-top: 2rem;">
+			      <a onclick="submitAsk()" class="weui-btn" style="background: #00d697;font-size: 0.8rem">确认</a>
+			    </p>	
+			</div>
+			<div id="ask_success_box">
+				<div id="ask_success_top">
+					<h2>恭喜你</h2>
+					<p>问题回答正确，获得联系方式</p>
+				</div>
+				<div id="ask_success_bottom">
+					<p><span class="ask_success_name">王大陆</span> <span class="ask_success_phone green_font">13833884738</span></p>
+				</div>	
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript" src="../../js/jquery-2.1.4.js"></script>
+	<script type="text/javascript" src="../../js/jquery-weui.js"></script>
+	<script type="text/javascript" src="../../js/menudown.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+
+		})
+		function openAsk(){
+			$('#ask_success_box').hide();
+			$('#ask_content_box').show();
+			$('#ask_mask').fadeIn();
+		}
+		function closeAsk(){
+			$('#ask_mask').fadeOut();
+		}
+		function submitAsk(){
+			$('#ask_mask').hide();
+			// $('#ask_success_box').fadeIn();
+			$('.submitBtn').html('已经付款')
+			$('.submitBtn').css({
+				background:'#999'
+			})
+			$('.submitBtn').removeAttr('onclick')
+			$.toast("支付成功");
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=0, width=device-width"/>
+	<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+	<title>首页导航</title>
+	<link rel="stylesheet" type="text/css" href="../../font/iconfont.css">
+	<link rel="stylesheet" type="text/css" href="../../css/weui.css">
+	<link rel="stylesheet" type="text/css" href="../../css/jquery-weui.css">
+	<link rel="stylesheet" type="text/css" href="../../css/menudown.css">
+	<link rel="stylesheet" type="text/css" href="../../css/common.css">
+	<link rel="stylesheet" type="text/css" href="../css/publish_common.css">
+	<style type="text/css">
+	</style>
+</head>
+<body>
+	<header>
+		<div class="weui-flex">
+		  <div class="weui-flex__item text_left" id="return"><a href="../../index.html"><i class="iconfont">&#xe676;</i></a></div>
+		  <div class="weui-flex__item text_center">寻物</div>
+		  <div class="weui-flex__item text_right" style="font-size: 0.7rem;"></div>
+		</div>
+	</header>
+	<!-- 表单第一页 -->
+	<div id="form_page_1">
+		<div class="weui-cell">
+			<div class="weui-cell__hd" style="border-left: 3px solid #00d697;line-height: 0.8rem;padding-left: 0.2rem">基本信息</div>
+		</div>
+		<div class="weui-panel__ft">
+			<a href="javascript:void(0);" class="weui-cell weui-cell_access">
+				<div class="weui-cell__bd">宠物类型</div>
+				<!-- <span class="weui-cell__ft"></span> -->
+				<span><i class="iconfont gray_14_font" onclick="openChoseType()">&#xe677;</i></span>
+			</a>    
+		</div>
+		<div class="weui-cell">
+			<div class="weui-cell__hd"><label class="weui-label">遗失地点</label></div>
+			<div class="weui-cell__bd">
+				<input class="weui-input text_right gray_14_font" type="text" placeholder="请输入地点">
+			</div>
+		</div>
+		<div class="weui-cell">
+			<div class="weui-cell__hd"><label for="" class="weui-label">遗失时间</label></div>
+			<div class="weui-cell__bd">
+				<input id='datetime-picker' class="gray_14_font weui-input text_right" type="text"  data-toggle='date' placeholder="点击选择时间">
+			</div>
+		</div>
+		<div class="weui-cell">
+			<div class="weui-cell__hd"><label for="" class="weui-label">大概描述</label></div>
+		</div>
+		<div style="padding: 0 0.6rem;">
+			<textarea class="weui-textarea gray_14_font" placeholder="物品的颜色、种类、等常规信息、不能过于详细，以防诈骗。" rows="3"></textarea>
+		</div>
+		<div class="weui-cells weui-cells_form">
+			<div class="weui-cell">
+				<div class="weui-cell__bd">
+					<div class="weui-uploader">
+						<div class="weui-uploader__hd">
+							<p class="weui-uploader__title">图片上传</p>
+							<div class="weui-uploader__info">0/2</div>
+						</div>
+						<div class="weui-uploader__bd">
+							<ul class="weui-uploader__files" id="uploaderFiles">
+								<li class="weui-uploader__file" style="background-image:url(../../img/1.jpg)"></li>
+								<li class="weui-uploader__file" style="background-image:url(../../img/2.jpg)"></li>
+								<li class="weui-uploader__file" style="background-image:url(../../img/3.jpg)"></li>
+								<li class="weui-uploader__file weui-uploader__file_status" style="background-image:url(../../img/4.jpg)">
+									<div class="weui-uploader__file-content">
+										<i class="weui-icon-warn"></i>
+									</div>
+								</li>
+								<li class="weui-uploader__file weui-uploader__file_status" style="background-image:url(../../img/5.jpg)">
+									<div class="weui-uploader__file-content">50%</div>
+								</li>
+							</ul>
+							<div class="weui-uploader__input-box">
+								<input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div style="width: 100%;text-align: center;height: 3rem;line-height: 3rem;font-size: 0.6rem;color: #999;">如果没有图片，可以在网络中搜索相似的图片</div>
+		<!-- 选择类型上拉框 -->
+		<div id="choseType" class="weui-popup__container">
+			<div class="weui-popup__overlay"></div>
+			<div class="weui-popup__modal"  style="background: #fff;">
+				<!-- 头部导航 -->
+				<header>
+					<div class="weui-flex">
+						<div class="weui-flex__item text_left"><i class="iconfont close-popup" style="font-size: 1.1rem;">&#xe676;</i></div>
+						<div class="weui-flex__item text_center">选择寻物类型</div>
+						<div class="weui-flex__item text_right" style="font-size: 0.7rem;"></div>
+					</div>
+				</header>
+				<!-- 搜索框 -->
+				<div class="weui-search-bar" id="searchBar">
+					<form class="weui-search-bar__form">
+						<div class="weui-search-bar__box">
+							<i class="weui-icon-search"></i>
+							<input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索" required="">
+							<a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
+						</div>
+						<label class="weui-search-bar__label" id="searchText">
+							<i class="weui-icon-search"></i>
+							<span>搜索</span>
+						</label>
+					</form>
+					<a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
+				</div>
+
+				<!-- 列表 -->
+				<div id="typeList">
+					<div class="weui-cell close-popup" onclick="choseType(this)">
+						<div class="weui-cell__hd"><label class="weui-label">猫</label></div>
+					</div>
+					<div class="weui-cell close-popup" onclick="choseType(this)">
+						<div class="weui-cell__hd"><label class="weui-label">狗</label></div>
+					</div>
+					<div class="weui-cell close-popup" onclick="choseType(this)">
+						<div class="weui-cell__hd"><label class="weui-label">猪</label></div>
+					</div>
+					<div class="weui-cell close-popup" onclick="choseType(this)">
+						<div class="weui-cell__hd"><label class="weui-label">牛</label></div>
+					</div>
+					<div class="weui-cell close-popup" onclick="choseType(this)">
+						<div class="weui-cell__hd"><label class="weui-label">羊</label></div>
+					</div>
+					<div class="weui-cell close-popup" onclick="choseType(this)">
+						<div class="weui-cell__hd"><label class="weui-label">其他</label></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<p class="weui-btn-area" style="margin: 1rem auto;margin-top: 1rem; width: 94%;">
+			<a onclick="nextStep(0)" class="weui-btn" style="background: #00d697;font-size: 0.8rem">下一步</a>
+		</p>
+	</div>
+
+	<!-- 表单第二页 -->
+	<div id="form_page_2">
+		<div class="weui-cell">
+			<div class="weui-cell__hd" style="border-left: 3px solid #00d697;line-height: 0.8rem;padding-left: 0.2rem">验证信息</div>
+		</div>
+		<div id="checkout_box">
+			<div class="weui-cell">
+				<div class="weui-cell__hd"><label class="weui-label">问题</label></div>
+				<div class="weui-cell__bd">
+					<input class="weui-input text_right gray_14_font" type="text">
+				</div>
+			</div>
+			<div class="weui-cell">
+				<div class="weui-cell__hd"><label class="weui-label">答案</label></div>
+				<div class="weui-cell__bd">
+					<input class="weui-input text_right gray_14_font" type="text">
+				</div>
+			</div>
+			<div class="weui-cell" style="margin-top: 0.8rem;">
+				<div class="weui-cell__hd"><label class="weui-label">问题</label></div>
+				<div class="weui-cell__bd">
+					<input class="weui-input text_right gray_14_font" type="text">
+				</div>
+			</div>
+			<div class="weui-cell">
+				<div class="weui-cell__hd"><label class="weui-label">答案</label></div>
+				<div class="weui-cell__bd">
+					<input class="weui-input text_right gray_14_font" type="text">
+				</div>
+			</div>
+			<div class="text_area_box">
+				至少需要填写一个验证问题，如身份证后8位等。平台保密，答对其中一个问题方可获取您的联系方式，以防骚扰。
+			</div>
+		</div>
+		<div class="head_box">
+			<div class="weui-cell">
+				<div class="weui-cell__hd" style="border-left: 3px solid #00d697;line-height: 0.8rem;padding-left: 0.2rem">悬赏</div>
+			</div>
+		</div>
+		<div class="weui-cell">
+			<div class="weui-cell__hd"><label class="weui-label">是否悬赏</label></div>
+			<div class="weui-cell__bd text_right">
+				<i class="iconfont gray_16_font">&#xe678;</i>
+			</div>
+		</div>
+		<div class="weui-cell">
+			<div class="weui-cell__hd"><label class="weui-label">悬赏金额</label></div>
+			<div class="weui-cell__bd">
+				<input class="weui-input text_right gray_14_font" type="text" placeholder="悬赏金额">
+			</div>
+		</div>
+		<div class="text_area_box">
+			首页展示，提高寻回率，可随时退款，收取1%手续费。
+		</div>
+		<p class="weui-btn-area" style="margin: 1rem auto;margin-top: 1rem; width: 94%;">
+			<a onclick="nextStep(1)" class="weui-btn" style="background: #00d697;font-size: 0.8rem">下一步</a>
+		</p>
+	</div>
+	<!-- 表单第三页 -->
+	<div id="form_page_3">
+		<div class="head_box">
+			<div class="weui-cell">
+				<div class="weui-cell__hd" style="border-left: 3px solid #00d697;line-height: 0.8rem;padding-left: 0.2rem">联系人资料</div>
+			</div>
+		</div>	
+		<div class="weui-cell">
+			<div class="weui-cell__hd"><label class="weui-label">姓名</label></div>
+			<div class="weui-cell__bd">
+				<input class="weui-input text_right gray_14_font" type="text" placeholder="">
+			</div>
+		</div>
+		<div class="weui-cell">
+			<div class="weui-cell__hd"><label class="weui-label">性别</label></div>
+			<div class="weui-cell__bd">
+				<input class="weui-input text_right gray_14_font sex_picker" type="text" placeholder="">
+			</div>
+		</div>
+		<div class="weui-cell">
+			<div class="weui-cell__hd"><label class="weui-label">电话</label></div>
+			<div class="weui-cell__bd">
+				<input class="weui-input text_right gray_14_font" type="text" placeholder="">
+			</div>
+		</div>
+		<div class="weui-cell">
+			<div class="weui-cell__hd"><label class="weui-label">紧急联系人</label></div>
+			<div class="weui-cell__bd">
+				<input class="weui-input text_right gray_14_font" type="text" placeholder="">
+			</div>
+		</div>
+		<div class="weui-cell">
+			<div class="weui-cell__hd"><label class="weui-label">紧急联系电话</label></div>
+			<div class="weui-cell__bd">
+				<input class="weui-input text_right gray_14_font" type="text" placeholder="">
+			</div>
+		</div>
+		<p class="weui-btn-area" style="margin: 1rem auto;margin-top: 1rem; width: 94%;">
+			<a onclick="nextStep(2)" class="weui-btn" style="background: #00d697;font-size: 0.8rem">提交</a>
+		</p>
+	</div>
+	<script type="text/javascript" src="../../js/jquery-2.1.4.js"></script>
+	<script type="text/javascript" src="../../js/jquery-weui.js"></script>
+	<!-- <script type="text/javascript" src="../../js/jquery-weui.js"></script> -->
+	<script type="text/javascript">
+		// $("#datetime-picker").datetimePicker({
+		// 	min:'year-mounth-day'
+		// });
+		// 时间选择
+		$("#datetime-picker").calendar();
+
+		// 性别选择
+		$(".sex_picker").picker({
+		  title: "请选择性别",
+		  cols: [
+		    {
+		      textAlign: 'center',
+		      values: ['男', '女']
+		    }
+		  ]
+		});
+		
+		function openChoseType(){
+			$("#choseType").popup();
+		}
+		function closeChoseType(){
+			$("#choseType").closePopup();
+		}
+		function choseType(){
+
+		}
+		// 下一步
+		function nextStep(index){
+			if(index==0){
+				$('#form_page_1').slideUp(300);
+				$('#form_page_2').slideDown(500);
+				$('#return').html('<i onclick="lastStep(0)" class="iconfont">&#xe676;</i>')
+			}else if(index==1){
+				$('#form_page_2').slideUp(300);
+				$('#form_page_3').slideDown(500);
+				$('#return').html('<i onclick="lastStep(1)" class="iconfont">&#xe676;</i>')
+			}else{
+				$('#form_page_3').slideUp(300);
+				$('#return').html('')
+			}
+			
+		}
+
+		// 上一步
+		function lastStep(index){
+			if(index==0){
+				$('#form_page_2').slideUp(300);
+				$('#form_page_1').slideDown(500);
+				$('#return').html('')
+			}else if(index==1){
+				$('#form_page_3').slideUp(300);
+				$('#form_page_2').slideDown(500);
+				$('#return').html('<i onclick="lastStep(0)" class="iconfont">&#xe676;</i>')
+			}
+			
+		}
+	</script>
+</body>
+</html>
